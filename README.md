@@ -1,33 +1,23 @@
 # Ticker Symbols
-
 This is a project for word sense disambiguation. 
+### Task definition
+The task is to build a classifier which can distinguish ticker and non-ticker context of certain candidate words. The list of ticker candidates is given. 
 
-The aim is to build a classifier which can distinguish ticker and non-ticker context of certain words.
+### Solution
+1) Data extraction: non-ticker entries were obtained from twitter.com and ticker entries were obtained from stocktwits.com - about 3 thousands for each ticker candidate (see `research/1_data_retrieval.ipynb`)
+Number of examples for each ticker:
+![tickers](https://user-images.githubusercontent.com/82182857/121756887-5a596000-cb24-11eb-9bda-db7c146f3e67.jpg)
 
-## Project structure
+2) Data analysis and feature generation, such as entities, emojis, positions in text etc. (see `research/2_data_analysis_and_feature_generation.ipynb`) 
+Classes are balanced: 
 
-### Evaluation
+![target](https://user-images.githubusercontent.com/82182857/121756917-7826c500-cb24-11eb-9ac3-58e267ae7967.jpg)
 
-* `scripts` - contains script for model evaluation
-* `models` - serialized models directory
-* `output` - results
+3) Tf-idf + XGBoost classifier (see `research/3_XGBoost.ipynb`)
 
-#### Research
+4) RNN classifier (see `4_RNN.ipynb`)
 
-* `1_data_retrieval.ipynb` - notebook which contains ETL code (step 1)
-* `2_data_analysis_and_feature_generation.ipynb` - notebook which contains data analysis and feature generation (step 2)
-* `3_XGBoost.ipynb` - notebook with XGBoost classifier
-* `4_RNN.ipynb` - notebook with RNN classifier
-
-#### Misc
-
-* `twitter` - non-ticker entries obtained at step 1 from twitter.com
-* `stocktwits_hope` - ticker entries obtained at step 1 from stocktwits.com
-* `vocab.txt` and `docs.bin` - serialized Spacy documents obtained at step 2
-* `all_feats_for_analysis.csv` - features generated at step 2
-* `requirements.txt` - requirements
-
-## Results
+### Results
 
 The final model is the XGBoost classifier + 1450D tf-idf vectors, because it's fast, interpretable and stable.
 
@@ -36,15 +26,3 @@ This model achieves following scores on my test data:
 * ROC AUC = `0.99`
 * precision = `0.95`
 * recall = `0.92`
-
-## How to evaluate the model
-
-The serialized model is located at the `models` directory. `predict.py` should be ran from from the `scripts` directory in order to evaluate the serialized model.
-This script takes path to the text file as it only argument. Text file should contain test examples one per line.
-
-### Notes on model evaluation
-
-1. Input examples may contain zero or any number of ticker words. In any case the program will return only one answer for one line.
-2. If there is no ticker in line, then it will return 0. If there are several tickers in one text, the program will return label for the first ticker found.
-3. The output file  s a pandas data frame with columns `[‘text’, ‘proba’, ‘label’]`.
-4. The threshold is `0.5`.
