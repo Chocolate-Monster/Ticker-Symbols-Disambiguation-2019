@@ -1,7 +1,8 @@
 # Ticker Symbols
-This is a project for word sense disambiguation. 
+This is a project for word sense disambiguation.
+
 ### Task definition
-The task is to build a classifier which can distinguish ticker and non-ticker context of certain candidate words. The list of ticker candidates is given. 
+The task is to determine for each candidate word whether it is a ticker or not. List of candidates is given.
 
 ### Solution
 1) Data extraction: non-ticker entries were obtained from twitter.com and ticker entries were obtained from stocktwits.com - about 3 thousands for each ticker candidate (see `research/1_data_retrieval.ipynb`)
