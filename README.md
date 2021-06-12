@@ -11,7 +11,6 @@ Number of examples for each ticker:
 
 2) Data analysis and feature generation, such as entities, emojis, positions in text etc. (see `research/2_data_analysis_and_feature_generation.ipynb`) 
 Classes are balanced: 
-
 ![target](https://user-images.githubusercontent.com/82182857/121756917-7826c500-cb24-11eb-9ac3-58e267ae7967.jpg)
 
 3) Tf-idf + XGBoost classifier (see `research/3_XGBoost.ipynb`)
