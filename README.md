@@ -17,7 +17,7 @@ Classes are balanced:
 
 3) Tf-idf + XGBoost classifier (see `research/3_XGBoost.ipynb`)
 
-4) RNN classifier (see `4_RNN.ipynb`)
+4) RNN classifier (see `research/4_RNN.ipynb`)
 
 ### Results
 
